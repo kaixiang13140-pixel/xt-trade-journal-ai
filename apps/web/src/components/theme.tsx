@@ -78,3 +78,5 @@ export function ThemeToggle({ iconOnly = false }: { iconOnly?: boolean }) {
     </Button>
   );
 }
+
+export const useTheme = () => useContext(ThemeContext);

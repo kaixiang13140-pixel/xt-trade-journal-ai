@@ -1,6 +1,7 @@
 "use client";
 
-import { I18nText } from "@/components/language";
+import { FOREX_BROKERS } from "@/lib/forex-brokers";
+import { I18nText, useLanguage } from "@/components/language";
 
 import { useId, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -19,18 +20,23 @@ export interface CreatedAccount {
 /** Shared local account creation for Import, manual entry and account management. */
 export function AccountCreateForm({
   kind,
+  initialBroker = "",
   onCreated,
   onSavingChange,
   className,
   showTitle = true,
 }: {
   kind?: "import" | "manual";
+  initialBroker?: string;
   onCreated: (account: CreatedAccount) => void;
   onSavingChange?: (saving: boolean) => void;
   className?: string;
   showTitle?: boolean;
 }) {
-  const [name, setName] = useState("");
+  const { t } = useLanguage();
+  const [name, setName] = useState(initialBroker);
+  const [broker, setBroker] = useState(initialBroker);
+  const [customBroker, setCustomBroker] = useState("");
   const [currency, setCurrency] = useState("USD");
   const [balance, setBalance] = useState("0");
   const [saving, setSaving] = useState(false);
@@ -52,6 +58,7 @@ export function AccountCreateForm({
     setError("");
     try {
       const result = await postJson<{ id: string }>("/api/accounts", {
+        broker: broker === "other" ? customBroker.trim() : broker,
         name: name.trim(),
         kind: kind ?? accountKind,
         currency,
@@ -101,6 +108,42 @@ export function AccountCreateForm({
           </select>
         </div>
       )}
+      <div className="space-y-1.5">
+        <Label htmlFor={`${fieldId}-broker`}>{t("Forex broker")}</Label>
+        <select
+          id={`${fieldId}-broker`}
+          className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+          value={broker}
+          disabled={saving}
+          onChange={(e) => {
+            setBroker(e.target.value);
+            if (!name && e.target.value !== "other") setName(e.target.value);
+          }}
+        >
+          <option value="">{t("No broker selected")}</option>
+          {FOREX_BROKERS.map((b) => (
+            <option key={b.id} value={b.name}>
+              {b.name}
+            </option>
+          ))}
+          <option value="other">{t("Other broker")}</option>
+        </select>
+        {broker === "other" && (
+          <Input
+            aria-label={t("Broker name")}
+            required
+            maxLength={120}
+            value={customBroker}
+            onChange={(e) => setCustomBroker(e.target.value)}
+            disabled={saving}
+          />
+        )}
+        <p className="text-xs text-muted-foreground">
+          {t(
+            "Broker selection labels your journal. Use report import or manual entry; it does not enable automatic sync.",
+          )}
+        </p>
+      </div>
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="space-y-1">
           <Label htmlFor={`${fieldId}-name`}>

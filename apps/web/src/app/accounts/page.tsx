@@ -1,5 +1,7 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import { FOREX_BROKERS } from "@/lib/forex-brokers";
 import { I18nText } from "@/components/language";
 import { Suspense, useState } from "react";
 import { Archive, ArchiveRestore, Plus, RefreshCw, Trash2 } from "lucide-react";
@@ -53,7 +55,9 @@ export default function AccountsPage() {
 function Accounts() {
   const { data, refresh } = useApi<{ accounts: AccountRow[] }>("/api/accounts");
   const [syncing, setSyncing] = useState<string | null>(null);
-  const [creating, setCreating] = useState(false);
+  const search = useSearchParams();
+  const requestedBroker = FOREX_BROKERS.find((b) => b.id === search.get("broker"))?.name ?? "";
+  const [creating, setCreating] = useState(Boolean(requestedBroker));
 
   const action = async <T = unknown,>(id: string, body: Record<string, unknown>) => {
     const result = await postJson<T>(`/api/accounts/${id}/actions`, body);
@@ -100,6 +104,7 @@ function Accounts() {
             </DialogDescription>
           </DialogHeader>
           <AccountCreateForm
+            initialBroker={requestedBroker}
             showTitle={false}
             onCreated={() => {
               refresh();

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useApi, postJson } from "@/lib/use-api";
 import { useLanguage } from "./language";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { PasswordInput } from "./password-input";
 import { Label } from "./ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
@@ -56,7 +56,7 @@ export function CustomerSettings() {
           <fieldset disabled={busy} className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="current-password">{t("Current password")}</Label>
-              <Input
+              <PasswordInput
                 id="current-password"
                 type="password"
                 autoComplete="current-password"
@@ -68,7 +68,7 @@ export function CustomerSettings() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="new-password">{t("New password")}</Label>
-              <Input
+              <PasswordInput
                 id="new-password"
                 type="password"
                 autoComplete="new-password"
@@ -82,7 +82,7 @@ export function CustomerSettings() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="confirm-password">{t("Confirm new password")}</Label>
-              <Input
+              <PasswordInput
                 id="confirm-password"
                 type="password"
                 autoComplete="new-password"

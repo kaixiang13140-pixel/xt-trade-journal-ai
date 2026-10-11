@@ -1439,3 +1439,142 @@ body.dashboard-is-dragging * {
     min-height: 44px;
   }
 }
+
+/* XT identity: static artwork and restrained chrome, no continuous animation. */
+:root {
+  --brand: #087e70;
+}
+.dark {
+  --brand: #54dbc5;
+  --ring: #54dbc5;
+}
+.journal-sidebar-nav-link[aria-current="page"] {
+  box-shadow: inset 2px 0 var(--brand);
+}
+.xt-auth {
+  color-scheme: dark;
+  --foreground: #eef5f4;
+  --muted-foreground: #a1b2af;
+  --input: #31423e;
+  --ring: #54dbc5;
+  --primary: #54dbc5;
+  --primary-foreground: #08201b;
+  --brand: #54dbc5;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(390px, 0.85fr);
+  min-height: 100dvh;
+  background: #080f11 url("/brand/xt-auth.webp") center/cover no-repeat;
+  color: #eef5f4;
+}
+.xt-auth-story {
+  padding: 48px clamp(32px, 5vw, 88px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 80px;
+  background: linear-gradient(0deg, rgba(4, 12, 14, 0.7), rgba(4, 12, 14, 0.1));
+}
+.xt-auth-intro {
+  max-width: 570px;
+  padding: 40px 0;
+}
+.xt-auth-eyebrow {
+  color: #77d9c8;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+.xt-auth-intro h1 {
+  font-size: clamp(36px, 4vw, 62px);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+  margin: 22px 0;
+  text-wrap: balance;
+}
+.xt-auth-intro h1 span {
+  color: #79dfcd;
+}
+.xt-auth-intro > p:not(.xt-auth-eyebrow) {
+  max-width: 350px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #b7cac6;
+}
+.xt-auth-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+}
+.xt-auth-features span {
+  border: 1px solid #45665c;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 10px;
+  color: #c7ded8;
+  background: #0b1d1bbb;
+}
+.xt-auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px;
+  background: rgba(6, 12, 14, 0.66);
+}
+.xt-auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 32px;
+  border: 1px solid #2b413d;
+  border-radius: 20px;
+  background: rgba(12, 23, 25, 0.94);
+  box-shadow: 0 24px 80px #0005;
+}
+.xt-auth-card input {
+  height: 46px;
+  background: #0a1416;
+  border-color: #30443f;
+}
+.xt-auth-card input:focus-visible {
+  border-color: #54dbc5;
+}
+.xt-auth-card button[type="submit"] {
+  margin-top: 12px;
+  height: 46px;
+  background: #54dbc5;
+  color: #08201b;
+  font-weight: 600;
+}
+@media (max-width: 900px) {
+  .xt-auth {
+    grid-template-columns: 1fr;
+    background-position: 20% center;
+  }
+  .xt-auth-story {
+    padding: 28px 24px 0;
+    gap: 0;
+    background: none;
+  }
+  .xt-auth-intro {
+    padding: 24px 0 0;
+    max-width: none;
+  }
+  .xt-auth-intro h1 {
+    font-size: 30px;
+    margin: 12px 0;
+  }
+  .xt-auth-intro > p:not(.xt-auth-eyebrow),
+  .xt-auth-features,
+  .xt-auth-story > p {
+    display: none;
+  }
+  .xt-auth-panel {
+    padding: 24px 16px 40px;
+    background: none;
+    align-items: flex-start;
+  }
+  .xt-auth-card {
+    padding: 24px;
+  }
+}

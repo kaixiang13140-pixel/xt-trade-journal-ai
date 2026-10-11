@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { PasswordInput } from "@/components/password-input";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { XTMark } from "@/components/xt-mark";
@@ -47,15 +47,39 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-background px-4 py-8">
-      <Card className="w-full max-w-md">
-        <CardContent className="pt-6">
+    <main className="xt-auth">
+      <section className="xt-auth-story" aria-label="XT Trade Journal AI">
+        <div className="flex items-center gap-3">
+          <XTMark className="h-11 w-11" />
+          <span className="text-sm font-semibold tracking-widest">XT TRADE JOURNAL AI</span>
+        </div>
+        <div className="xt-auth-intro">
+          <p className="xt-auth-eyebrow">FOREX · JOURNAL · INSIGHT</p>
+          <h1>
+            {t("Trade with clarity.")}
+            <br />
+            <span>{t("Grow with discipline.")}</span>
+          </h1>
+          <p>{t("Your forex workspace. Charts, trades and reflection in one place.")}</p>
+          <div className="xt-auth-features">
+            <span>{t("Forex charts")}</span>
+            <span>{t("Private journal")}</span>
+            <span>{t("Desktop · Tablet · Phone")}</span>
+          </div>
+        </div>
+        <p className="text-xs text-white/40">XT / YOUR NEXT CHAPTER</p>
+      </section>
+      <section className="xt-auth-panel">
+        <div className="xt-auth-card">
           <div className="mb-4 flex justify-end">
             <LanguageToggle compact />
           </div>
           <div className="mb-6 text-center">
-            <XTMark className="mx-auto mb-3 h-12 w-12 text-brand" />
-            <h1 className="text-xl font-semibold">XT Trade Journal AI</h1>
+            <XTMark className="mx-auto mb-5 h-14 w-14 text-brand" />
+            <p className="xt-auth-eyebrow">XT / MEMBER ACCESS</p>
+            <h2 className="mt-3 text-2xl font-semibold">
+              {t(registering ? "Create your account" : "Welcome back")}
+            </h2>
             <p className="mt-2 text-sm text-muted-foreground">
               {t("Desktop, tablet and phone — one account.")}
             </p>
@@ -97,7 +121,8 @@ export default function LoginPage() {
               )}
               <div className="space-y-1.5">
                 <Label htmlFor="xt-password">{t("Password")}</Label>
-                <Input
+                <PasswordInput
+                  key={registering ? "register" : "login"}
                   id="xt-password"
                   type="password"
                   value={password}
@@ -168,8 +193,8 @@ export default function LoginPage() {
               )}
             </form>
           )}
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+      </section>
+    </main>
   );
 }

@@ -6,6 +6,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { FILTER_KEYS } from "@luxalgo/journal-core";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
+  ChartCandlestick,
   CircleHelp,
   BarChart3,
   BookOpen,
@@ -37,6 +38,7 @@ import { CustomerSession } from "./customer-session";
 
 const NAV = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/markets", label: "Markets", icon: ChartCandlestick },
   { href: "/calendar", label: "Calendar", icon: CalendarDays },
   { href: "/journal", label: "Daily journal", icon: NotebookPen },
   { href: "/trades", label: "Trades", icon: ListOrdered },
@@ -49,6 +51,7 @@ const NAV = [
 ] as const;
 
 const NAV_SETUP = [
+  { href: "/brokers", label: "Forex brokers", icon: Landmark },
   { href: "/import", label: "Import", icon: Import },
   { href: "/accounts", label: "Accounts", icon: Wallet },
   { href: "/settings", label: "Settings", icon: Settings },
