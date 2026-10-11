@@ -86,7 +86,9 @@ function waitForPage() {
         if (cancelled) return;
         const loginRedirect =
           response.statusCode === 307 &&
-          ["/login", `${appUrl}/login`].includes(response.headers.location);
+          ["/login", `${appUrl}/login`, "http://localhost:3000/login"].includes(
+            response.headers.location,
+          );
         if (
           (response.statusCode === 200 && content.includes("XT Trade Journal AI")) ||
           loginRedirect
