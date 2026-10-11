@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguage } from "./language";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "./ui/button";
@@ -59,6 +60,7 @@ export function PrivacyToggle({
   compact?: boolean;
   iconOnly?: boolean;
 }) {
+  const { t } = useLanguage();
   const { enabled, ready, error, toggle } = useContext(PrivacyContext);
   return (
     <div className={compact ? "relative shrink-0" : "space-y-2"}>
@@ -76,11 +78,11 @@ export function PrivacyToggle({
         aria-pressed={enabled}
         disabled={!ready}
         onClick={toggle}
-        title="Hide balances, P&L and trade prices across the journal"
+        title={t("Hide balances, P&L and trade prices across the journal")}
       >
         {enabled ? <EyeOff /> : <Eye />}
-        {!iconOnly && (compact ? "Privacy" : "Privacy mode")}
-        {!iconOnly && <span className="ml-auto text-xs">{enabled ? "On" : "Off"}</span>}
+        {!iconOnly && t(compact ? "Privacy" : "Privacy mode")}
+        {!iconOnly && <span className="ml-auto text-xs">{t(enabled ? "On" : "Off")}</span>}
       </Button>
       {error && (
         <p

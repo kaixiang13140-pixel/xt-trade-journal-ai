@@ -233,6 +233,108 @@ export const ZH: Record<string, string> = {
   "Account creation failed.": "创建账户失败。",
   "Wrong password": "密码不正确",
   Unlock: "进入",
+  Help: "使用帮助",
+  "Getting started": "开始使用",
+  "Your journal is empty": "你的交易日记还是空的",
+  "Import your first trades": "导入第一批交易",
+  "Demo data lands in its own account; delete it anytime under Accounts.":
+    "模拟数据会放入独立的交易账户，可随时在「交易账户」中删除。",
+  "Demo data could not be loaded. Please try again.": "模拟数据加载失败，请重试。",
+  "Start with your timezone, then import a report or record a trade manually.":
+    "先设置显示时区，然后导入交易报告，或手动记录一笔交易。",
+  "Set your timezone": "设置显示时区",
+  "MT5: import an HTML or CSV history report. Automatic MT5 sync is not available yet.":
+    "MT5：导入 HTML 或 CSV 历史交易报告，目前尚未支持自动同步。",
+  Language: "语言",
+  "Choose the language used on this device.": "选择这台设备显示的语言。",
+  Trading: "交易设置",
+  "Settings section": "设置分区",
+  "Export your data": "导出你的数据",
+  "Trades (CSV)": "交易记录（CSV）",
+  "Save a full journal backup, or export your trades as a CSV.":
+    "下载完整交易日记备份，或把交易记录导出为 CSV。",
+  "Choose the timezones used to display and import your trades.":
+    "设置交易显示时区与默认导入时区。",
+  "Manage contract multipliers, breakeven rules, fees, and risk defaults.":
+    "管理合约乘数、保本规则、手续费和默认风险设置。",
+  "Set a reporting currency and saved exchange rates for combined performance.":
+    "设置统计币种及换算汇率，以汇总不同币种账户的表现。",
+  "Connect price history or upload candles for replay and trade analysis.":
+    "连接历史行情或上传蜡烛图数据，用于交易回放与分析。",
+  "Choose your AI provider and manage your model and API key.":
+    "选择 AI 服务商，并管理模型和 API 密钥。",
+  "Download your journal data for safekeeping or use in other tools.":
+    "下载交易日记数据作为备份，或用于其他工具。",
+  Timezones: "时区",
+  "Display timezone (IANA)": "显示时区（IANA）",
+  "Default import timezone (IANA)": "默认导入时区（IANA）",
+  "Trade times, calendars, journal days, and analytics use this timezone.":
+    "交易时间、日历、每日复盘和统计分析均使用这个时区。",
+  "Use this device's timezone": "使用本机时区",
+  "Used for timestamps without an offset in file imports and IBKR broker sync. You can override it for each file. Existing trades are not changed; correcting an IBKR account's timezone requires a separate account for recovery.":
+    "用于导入文件和 IBKR 同步中未注明时区的时间。每次导入可单独调整，不会修改已有交易；纠正 IBKR 账户时区需要使用另一个账户重新恢复数据。",
+  "Save timezones": "保存时区",
+  "Timezones saved.": "时区已保存。",
+  "Contract multipliers": "合约乘数",
+  "Futures/options — one per line, SYMBOL=multiplier": "期货／期权：每行一个，格式为 品种=乘数",
+  "Use the exact symbol shown on your imported trades, including the contract month when present.":
+    "请输入导入交易中显示的完整品种代码；如包含合约月份，也请一并填写。",
+  "Saving multipliers recalculates existing trade P&L from fills and preserves annotations.":
+    "保存乘数后，将按成交记录重新计算已有交易盈亏，并保留批注。",
+  "Save multipliers": "保存乘数",
+  "Contract multipliers saved.": "合约乘数已保存。",
+  "Save failed": "保存失败",
+  "Choose a timezone": "选择时区",
+  "Search timezones": "搜索时区",
+  "No matching timezone. Try a city or a full timezone name.":
+    "没有匹配的时区，请尝试城市名或完整时区名称。",
+  "Account security": "账户安全",
+  "Current password": "当前密码",
+  "New password": "新密码",
+  "Confirm new password": "确认新密码",
+  "Change password": "修改密码",
+  "Changing your password signs out your other devices. This device stays signed in.":
+    "修改密码后，其他设备会退出登录，当前设备保持登录。",
+  "Passwords do not match.": "两次输入的新密码不一致。",
+  "Current password is incorrect.": "当前密码不正确。",
+  "Password changed. Other devices have been signed out.": "密码已修改，其他设备已退出登录。",
+  "Your password changed. Please sign in again.": "密码已发生变化，请重新登录。",
+  "Sign out failed. Please try again.": "退出登录失败，请重试。",
+  "Signing out…": "正在退出…",
+  "Enter a name up to 80 characters.": "请输入名字，最多 80 个字符。",
+  "Enter valid account details.": "请输入有效的账户信息。",
+  Unauthorized: "登录已失效，请重新登录。",
+  "Request is too large.": "提交的内容过大。",
+  Privacy: "隐私",
+  On: "开启",
+  Off: "关闭",
+  "Switch to light mode": "切换浅色模式",
+  "Switch to dark mode": "切换深色模式",
+  "Hide balances, P&L and trade prices across the journal": "隐藏交易日记中的余额、盈亏与交易价格",
+  "1. Set your timezone": "1. 设置显示时区",
+  "Choose your local display timezone. For Malaysia, use Asia/Kuala_Lumpur. Your report import timezone should follow the broker statement.":
+    "显示时区请选择你所在地区；马来西亚使用 Asia/Kuala_Lumpur。交易报告的导入时区应按券商账单设置。",
+  "2. Add your trading records": "2. 添加交易记录",
+  "Import a broker report, or create a manual account and enter your trades. Keep different trading accounts separate.":
+    "导入券商报告，或创建手动账户并记录交易。不同交易账户请分开管理。",
+  "3. Review and back up": "3. 复盘并备份",
+  "Use the calendar and daily journal to review your trades. Download a backup from Settings regularly.":
+    "通过交易日历和每日复盘回顾交易，并定期在设置页下载备份。",
+  "Open settings": "打开设置",
+  "Open import": "打开导入",
+  "Open accounts": "打开交易账户",
+  "Open calendar": "打开交易日历",
+  "How does MT5 work?": "MT5 怎么使用？",
+  "Phone and tablet": "手机和平板",
+  "Open the same hosted HTTPS address in your browser and sign in with the same email. Your local computer address is not a public website.":
+    "在浏览器打开同一个已上线的 HTTPS 网址，并使用同一邮箱登录。本机电脑地址不是公网网址。",
+  "About AI features": "关于 AI 功能",
+  "Configure your own AI provider and API key in Settings. Provider usage may cost money; journal browsing does not require an AI key.":
+    "在设置页配置自己的 AI 服务商和 API 密钥。调用 AI 服务可能产生费用；浏览交易日记不需要 AI 密钥。",
+  "Record trades. Review decisions. Build better habits.":
+    "记录交易，复盘决策，建立更好的交易习惯。",
+  "Choose an account and enter your buys and sells. Save an entry alone for an open position, or include the exit to record a closed trade.":
+    "选择交易账户并填写买卖记录。只保存入场成交可记录未平仓仓位；同时填写出场成交可记录已平仓交易。",
 };
 
 export function translateUi(text: string, locale: "en" | "zh") {

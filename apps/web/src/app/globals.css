@@ -1425,3 +1425,17 @@ body.dashboard-is-dragging * {
   max-width: 100%;
   border-radius: 6px;
 }
+
+/* Larger touch form controls without changing the desktop density. */
+@media (max-width: 1023px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+  textarea,
+  select {
+    font-size: 16px;
+    min-height: 44px;
+  }
+  .journal-mobile-header button,
+  .journal-nav-drawer .journal-sidebar-nav-link {
+    min-height: 44px;
+  }
+}

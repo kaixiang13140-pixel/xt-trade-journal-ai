@@ -7,7 +7,12 @@ import { eq } from "drizzle-orm";
 
 const jar = vi.hoisted(() => ({ token: undefined as string | undefined }));
 vi.mock("next/headers", () => ({
-  cookies: async () => ({ get: () => (jar.token ? { value: jar.token } : undefined) }),
+  cookies: async () => ({
+    get: () => (jar.token ? { value: jar.token } : undefined),
+    set: (_name: string, token: string) => {
+      jar.token = token;
+    },
+  }),
 }));
 const directory = mkdtempSync(join(tmpdir(), "xt-customers-"));
 const prior = {
@@ -29,6 +34,7 @@ const {
   authLimit,
   customerBody,
   verifyRegistrationCode,
+  changeCustomerPassword,
 } = await import("../src/server/customers");
 const { withCustomer } = await import("../src/server/tenant");
 const { db, dataDir, accounts, attachments } = await import("../src/db");
@@ -38,6 +44,8 @@ const { GET: getAccounts, POST: createAccount } = await import("../src/app/api/a
 const { PATCH: editAccount } = await import("../src/app/api/accounts/[id]/route");
 const { GET: getAttachment } = await import("../src/app/api/attachments/[id]/route");
 const { createMarketTransport } = await import("../src/server/market-data/transport");
+const { POST: updatePassword } = await import("../src/app/api/customer/password/route");
+const { POST: signIn } = await import("../src/app/api/customer/login/route");
 const password = "customer-test-password-2026";
 const alice = await registerCustomer({ email: "Alice@example.test", name: "Alice", password });
 const bob = await registerCustomer({ email: "bob@example.test", name: "Bob", password });
@@ -265,5 +273,69 @@ describe("customer data isolation", () => {
         })
       ).status,
     ).toBe(404);
+  });
+});
+
+describe("customer password changes", () => {
+  it("requires the old password, preserves sessions after rejection and never affects a different customer", async () => {
+    const other = await registerCustomer({
+      email: "security@example.test",
+      name: "Security",
+      password,
+    });
+    const phone = createCustomerSession(other.id);
+    const bobSession = createCustomerSession(bob.id);
+    await expect(
+      changeCustomerPassword(other.id, "wrong", "new-secure-password-123"),
+    ).rejects.toMatchObject({ status: 401 });
+    await expect(changeCustomerPassword(other.id, password, "short")).rejects.toMatchObject({
+      status: 400,
+    });
+    expect(customerForToken(phone)?.id).toBe(other.id);
+    jar.token = phone;
+    const response = await updatePassword(
+      new Request("http://localhost/api/customer/password", {
+        method: "POST",
+        body: JSON.stringify({
+          currentPassword: password,
+          newPassword: "new-secure-password-123",
+          userId: bob.id,
+        }),
+      }),
+    );
+    expect(response.status).toBe(200);
+    expect(customerForToken(phone)).toBeNull();
+    expect(customerForToken(jar.token)?.id).toBe(other.id);
+    expect(customerForToken(bobSession)?.id).toBe(bob.id);
+    await expect(loginCustomer(other.email, password)).rejects.toMatchObject({ status: 401 });
+    const login = await signIn(
+      new Request("http://localhost/api/customer/login", {
+        method: "POST",
+        body: JSON.stringify({ email: other.email, password: "new-secure-password-123" }),
+      }),
+    );
+    expect(login.status).toBe(200);
+    const body = await login.json();
+    expect(body.user.email).toBe(other.email);
+    expect(body.user).not.toHaveProperty("token");
+    expect(body.user).not.toHaveProperty("password_hash");
+  });
+  it("rejects anonymous password updates and allows only one concurrent password change", async () => {
+    jar.token = undefined;
+    expect(
+      (
+        await updatePassword(
+          new Request("http://localhost/api/customer/password", { method: "POST", body: "{}" }),
+        )
+      ).status,
+    ).toBe(401);
+    const user = await registerCustomer({ email: "race@example.test", name: "Race", password });
+    const results = await Promise.allSettled([
+      changeCustomerPassword(user.id, password, "first-new-password-123"),
+      changeCustomerPassword(user.id, password, "second-new-password-123"),
+    ]);
+    expect(results.filter((result) => result.status === "fulfilled")).toHaveLength(1);
+    const failure = results.find((result) => result.status === "rejected");
+    expect(failure?.status === "rejected" && failure.reason.status).toBe(409);
   });
 });

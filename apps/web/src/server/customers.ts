@@ -131,7 +131,7 @@ export async function registerCustomer(input: {
   return user;
 }
 
-export async function loginCustomer(emailInput: unknown, password: unknown) {
+export async function loginCustomer(emailInput: unknown, password: unknown, startSession = false) {
   const email = validEmail(emailInput);
   if (typeof password !== "string" || password.length > 128)
     throw new CustomerError("Incorrect email or password.", 401);
@@ -146,7 +146,51 @@ export async function loginCustomer(emailInput: unknown, password: unknown) {
   registry()
     .prepare("DELETE FROM xt_auth_limits WHERE scope = ?")
     .run(digest(`login:${email}`));
-  return { id: user.id, email: user.email, name: user.name };
+  const publicUser = { id: user.id, email: user.email, name: user.name };
+  if (!startSession) return { ...publicUser, token: undefined };
+  return registry()
+    .transaction(() => {
+      const latest = registry()
+        .prepare("SELECT password_hash FROM xt_users WHERE id=?")
+        .get(user.id) as { password_hash: string } | undefined;
+      if (latest?.password_hash !== user.password_hash)
+        throw new CustomerError("Incorrect email or password.", 401);
+      return { ...publicUser, token: createCustomerSession(user.id) };
+    })
+    .immediate();
+}
+
+export async function changeCustomerPassword(
+  userId: string,
+  currentPassword: unknown,
+  newPassword: unknown,
+) {
+  authLimit(`password:${userId}`, 10);
+  if (typeof currentPassword !== "string" || currentPassword.length > 128)
+    throw new CustomerError("Current password is incorrect.", 401);
+  if (typeof newPassword !== "string" || newPassword.length < 12 || newPassword.length > 128)
+    throw new CustomerError("Use a password with 12 to 128 characters.");
+  const user = registry().prepare("SELECT * FROM xt_users WHERE id=?").get(userId) as
+    StoredUser | undefined;
+  if (!user) throw new CustomerError("Unauthorized", 401);
+  const oldHash = (await scryptAsync(currentPassword, user.salt, 64)) as Buffer;
+  if (!timingSafeEqual(oldHash, Buffer.from(user.password_hash, "hex")))
+    throw new CustomerError("Current password is incorrect.", 401);
+  const salt = randomBytes(16).toString("hex");
+  const hash = (await scryptAsync(newPassword, salt, 64)) as Buffer;
+  registry()
+    .transaction(() => {
+      const result = registry()
+        .prepare("UPDATE xt_users SET password_hash=?, salt=? WHERE id=? AND password_hash=?")
+        .run(hash.toString("hex"), salt, user.id, user.password_hash);
+      if (result.changes !== 1)
+        throw new CustomerError("Your password changed. Please sign in again.", 409);
+      registry().prepare("DELETE FROM xt_sessions WHERE user_id=?").run(user.id);
+      registry()
+        .prepare("DELETE FROM xt_auth_limits WHERE scope=?")
+        .run(digest(`password:${userId}`));
+    })
+    .immediate();
 }
 
 export function createCustomerSession(userId: string) {

@@ -6,6 +6,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { FILTER_KEYS } from "@luxalgo/journal-core";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
+  CircleHelp,
   BarChart3,
   BookOpen,
   BookText,
@@ -51,6 +52,7 @@ const NAV_SETUP = [
   { href: "/import", label: "Import", icon: Import },
   { href: "/accounts", label: "Accounts", icon: Wallet },
   { href: "/settings", label: "Settings", icon: Settings },
+  { href: "/help", label: "Help", icon: CircleHelp },
 ] as const;
 
 const SIDEBAR_COLLAPSED_KEY = "journal-sidebar-collapsed-v1";
@@ -256,7 +258,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </Link>
         <LanguageToggle compact />
         <CustomerSession compact />
-        <PrivacyToggle compact />
+        <PrivacyToggle iconOnly />
         <ThemeToggle iconOnly />
       </header>
       <aside

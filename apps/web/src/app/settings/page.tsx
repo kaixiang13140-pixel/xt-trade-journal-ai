@@ -1,6 +1,6 @@
 "use client";
 
-import { I18nText } from "@/components/language";
+import { I18nText, useLanguage } from "@/components/language";
 import { Suspense, useEffect, useRef, useState } from "react";
 import {
   ArrowLeftRight,
@@ -11,6 +11,7 @@ import {
   SlidersHorizontal,
   Sparkles,
 } from "lucide-react";
+import { CustomerSettings } from "@/components/customer-settings";
 import { JournalDefaultSettings } from "@/components/journal-default-settings";
 import { ContractMultiplierSettings, TimeZoneSettings } from "@/components/journal-settings";
 import { MarketDataSettings } from "@/components/market-data-settings";
@@ -79,6 +80,7 @@ export default function SettingsPage() {
 }
 
 function Settings() {
+  const { t, locale, setLocale } = useLanguage();
   const [active, setActive] = useState<Section>("general");
   const top = useRef<HTMLDivElement>(null);
 
@@ -136,13 +138,13 @@ function Settings() {
               }}
             >
               <Icon aria-hidden="true" className="size-4 shrink-0" />
-              {label}
+              {t(label)}
             </a>
           ))}
         </nav>
         <div className="space-y-2 lg:hidden">
           <Label htmlFor="settings-section" className="text-xs text-muted-foreground">
-            Settings section
+            <I18nText text="Settings section" />
           </Label>
           <OptionSelect
             id="settings-section"
@@ -151,7 +153,7 @@ function Settings() {
           >
             {sections.map(({ id, label }) => (
               <option key={id} value={id}>
-                {label}
+                {t(label)}
               </option>
             ))}
           </OptionSelect>
@@ -162,12 +164,35 @@ function Settings() {
             <section key={id} hidden={active !== id} aria-labelledby={`settings-heading-${id}`}>
               <div className="mb-5 space-y-1.5">
                 <h2 id={`settings-heading-${id}`} className="text-xl font-semibold tracking-tight">
-                  {label}
+                  {t(label)}
                 </h2>
-                <p className="text-sm text-muted-foreground">{description}</p>
+                <p className="text-sm text-muted-foreground">{t(description)}</p>
               </div>
               <div className="space-y-4">
-                {id === "general" && <TimeZoneSettings />}
+                {id === "general" && (
+                  <>
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>{t("Language")}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2">
+                        <Label htmlFor="interface-language">
+                          {t("Choose the language used on this device.")}
+                        </Label>
+                        <OptionSelect
+                          id="interface-language"
+                          value={locale}
+                          onValueChange={(value) => setLocale(value as "en" | "zh")}
+                        >
+                          <option value="zh">中文</option>
+                          <option value="en">English</option>
+                        </OptionSelect>
+                      </CardContent>
+                    </Card>
+                    <TimeZoneSettings />
+                    <CustomerSettings />
+                  </>
+                )}
                 {id === "trading" && (
                   <>
                     <ContractMultiplierSettings />
@@ -180,11 +205,13 @@ function Settings() {
                 {id === "your-data" && (
                   <Card>
                     <CardHeader>
-                      <CardTitle>Export your data</CardTitle>
+                      <CardTitle>
+                        <I18nText text="Export your data" />
+                      </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <p className="text-sm text-muted-foreground">
-                        Save a full journal backup, or export your trades as a CSV.
+                        <I18nText text="Save a full journal backup, or export your trades as a CSV." />
                       </p>
                       <div className="flex flex-wrap gap-2">
                         <Button variant="outline" asChild>
@@ -196,7 +223,7 @@ function Settings() {
                         <Button variant="outline" asChild>
                           <a href="/api/export?format=csv" download>
                             <Download aria-hidden="true" />
-                            Trades (CSV)
+                            <I18nText text="Trades (CSV)" />
                           </a>
                         </Button>
                       </div>

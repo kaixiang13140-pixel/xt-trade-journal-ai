@@ -5,7 +5,6 @@ import {
   authLimit,
   customerBody,
   CUSTOMER_COOKIE,
-  createCustomerSession,
   customerCookieOptions,
   loginCustomer,
   requireSameOrigin,
@@ -17,12 +16,8 @@ export const POST = handler(
     requireSameOrigin(request);
     authLimit("login-global", 60, 60);
     const body = await customerBody(request);
-    const user = await loginCustomer(body?.email, body?.password);
-    (await cookies()).set(
-      CUSTOMER_COOKIE,
-      createCustomerSession(user.id),
-      customerCookieOptions(request.url),
-    );
+    const { token, ...user } = await loginCustomer(body?.email, body?.password, true);
+    (await cookies()).set(CUSTOMER_COOKIE, token!, customerCookieOptions(request.url));
     return ok({ user });
   },
   { public: true },

@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguage } from "./language";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { Moon, Sun } from "lucide-react";
 import { THEME_KEY, themePreference, type Theme } from "@/lib/theme";
@@ -54,6 +55,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 }
 
 export function ThemeToggle({ iconOnly = false }: { iconOnly?: boolean }) {
+  const { t } = useLanguage();
   const { theme, ready, toggle } = useContext(ThemeContext);
   const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
   return (
@@ -68,11 +70,11 @@ export function ThemeToggle({ iconOnly = false }: { iconOnly?: boolean }) {
       }
       disabled={!ready}
       onClick={toggle}
-      aria-label={label}
-      title={iconOnly ? label : undefined}
+      aria-label={t(label)}
+      title={iconOnly ? t(label) : undefined}
     >
       {theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
-      {!iconOnly && (theme === "dark" ? "Light mode" : "Dark mode")}
+      {!iconOnly && t(theme === "dark" ? "Light mode" : "Dark mode")}
     </Button>
   );
 }

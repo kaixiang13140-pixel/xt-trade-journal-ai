@@ -1,6 +1,6 @@
 "use client";
 
-import { I18nText } from "@/components/language";
+import { I18nText, useLanguage } from "@/components/language";
 import Link from "next/link";
 import { Suspense, useState } from "react";
 import type {
@@ -815,41 +815,64 @@ function Empty({ label }: { label: string }) {
 }
 
 function EmptyState() {
+  const { t } = useLanguage();
+  const [error, setError] = useState("");
   const [loadingDemo, setLoadingDemo] = useState(false);
   const loadDemo = async () => {
+    setError("");
     setLoadingDemo(true);
     try {
       await postJson("/api/demo", {});
       window.location.reload();
     } catch {
+      setError("Demo data could not be loaded. Please try again.");
       setLoadingDemo(false);
     }
   };
   return (
     <div>
       <div className="flex flex-col items-center justify-center gap-3 px-4 py-24 text-center">
-        <h2 className="text-xl font-semibold">Your journal is empty</h2>
+        <h2 className="text-xl font-semibold">
+          <I18nText text="Your journal is empty" />
+        </h2>
         <p className="max-w-md text-sm text-muted-foreground">
-          Connect a broker for automatic sync, upload a statement from 10+ platforms (including your
-          TradeZella export), or add trades manually.
+          <I18nText text="Start with your timezone, then import a report or record a trade manually." />
         </p>
         <div className="flex flex-wrap items-center justify-center gap-2">
           <Link
             href="/import"
             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
-            Import your first trades
+            <I18nText text="Import your first trades" />
           </Link>
           <button
             onClick={loadDemo}
             disabled={loadingDemo}
             className="rounded-md border px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:opacity-50"
           >
-            {loadingDemo ? "Loading…" : "Load demo data"}
+            {t(loadingDemo ? "Loading…" : "Load demo data")}
           </button>
         </div>
+        <Link href="/help" className="text-sm text-brand underline underline-offset-4">
+          {t("Getting started")}
+        </Link>
+        <Link
+          href="/settings#general"
+          className="text-sm text-muted-foreground underline underline-offset-4"
+        >
+          {t("Set your timezone")}
+        </Link>
+        <AddTradeDialog onSaved={() => window.location.reload()} />
+        {error && (
+          <p role="alert" className="text-sm text-destructive">
+            {t(error)}
+          </p>
+        )}
+        <p className="max-w-md text-xs text-muted-foreground">
+          {t("MT5: import an HTML or CSV history report. Automatic MT5 sync is not available yet.")}
+        </p>
         <p className="text-xs text-muted-foreground">
-          Demo data lands in its own account; delete it anytime under Accounts.
+          <I18nText text="Demo data lands in its own account; delete it anytime under Accounts." />
         </p>
       </div>
     </div>
