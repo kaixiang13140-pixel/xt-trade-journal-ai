@@ -8,9 +8,9 @@ import { ThemeProvider } from "@/components/theme";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
 export const metadata: Metadata = {
-  title: "Trade Journal",
+  title: "XT Trade Journal AI",
   description:
-    "The open-source trade journal — broker sync, deep analytics, daily journaling, and AI-native reflection. Self-hosted, free forever.",
+    "XT Trade Journal AI — your personal trading journal, performance analytics, and AI reflection.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

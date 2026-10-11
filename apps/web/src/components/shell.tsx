@@ -25,7 +25,7 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LuxAlgoMark } from "@/components/luxalgo-mark";
+import { XTMark } from "@/components/xt-mark";
 import { PrivacyToggle } from "./privacy";
 import { ThemeToggle } from "./theme";
 import { PageTransition } from "./page-transition";
@@ -182,7 +182,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <div>
         Open source ·{" "}
         <a
-          href="https://github.com/LuxAlgo/trade-journal"
+          href="https://github.com/kaixiang13140-pixel/xt-trade-journal-ai"
           className="underline underline-offset-2 hover:text-foreground"
           target="_blank"
           rel="noreferrer"
@@ -190,6 +190,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           GitHub
         </a>
       </div>
+      <div>Built on LuxAlgo’s open-source engine.</div>
       <div>Not investment advice.</div>
     </div>
   );
@@ -214,9 +215,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
               aria-describedby={undefined}
             >
               <div className="flex h-14 shrink-0 items-center gap-2.5 border-b px-4">
-                <LuxAlgoMark className="h-[18px] w-5" />
+                <XTMark className="h-[18px] w-5" />
                 <DialogPrimitive.Title className="text-sm font-semibold">
-                  Trade Journal
+                  XT Journal AI
                 </DialogPrimitive.Title>
                 <DialogPrimitive.Close asChild>
                   <Button
@@ -241,8 +242,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
           href="/"
           className="mr-auto flex min-w-0 items-center gap-2 text-sm font-semibold tracking-tight"
         >
-          <LuxAlgoMark className="hidden h-4 w-[18px] shrink-0 min-[380px]:block" />
-          <span className="truncate">Trade Journal</span>
+          <XTMark className="hidden h-4 w-[18px] shrink-0 min-[380px]:block" />
+          <span className="truncate">XT Journal AI</span>
         </Link>
         <PrivacyToggle compact />
         <ThemeToggle iconOnly />
@@ -254,9 +255,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
       >
         <div className="journal-sidebar-header relative flex h-14 shrink-0 items-center border-b">
           <Link href="/" className="journal-sidebar-home flex h-full min-w-0 items-center gap-2.5">
-            <LuxAlgoMark className="h-[18px] w-5 shrink-0" />
+            <XTMark className="h-[18px] w-5 shrink-0" />
             <span className="journal-sidebar-brand-label text-sm font-semibold tracking-tight">
-              Trade Journal
+              XT Journal AI
             </span>
           </Link>
           <Button

@@ -1,11 +1,11 @@
 {
-  "name": "trade-journal-monorepo",
+  "name": "xt-trade-journal-ai",
   "private": true,
   "description": "The open-source trade journal. Broker sync, deep analytics, daily journaling, and AI-native reflection. Self-hosted, free forever.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuxAlgo/trade-journal.git"
+    "url": "git+https://github.com/kaixiang13140-pixel/xt-trade-journal-ai.git"
   },
   "engines": {
     "node": ">=22"

@@ -1,21 +1,17 @@
 <div align="center">
 
-<img src=".github/assets/banner.svg" alt="Trade Journal: the open-source trade journal" width="100%" />
+# XT Trade Journal AI
 
-<br/>
+Broker sync, deep analytics, a P&L calendar, trade replay, prop firm tracking, daily journaling with voice dictation, and AI reflection. Run your own copy locally.
 
-# Trade Journal
-
-Broker sync, deep analytics, a P&L calendar, trade replay, prop firm tracking, daily journaling with voice dictation, and AI reflection. Run it locally, or use it free inside LuxAlgo.
-
-Trade Journal is a [LuxAlgo](https://luxalgo.com) open-source project.
+XT Trade Journal AI is an independently branded fork of [LuxAlgo’s open-source Trade Journal](https://github.com/LuxAlgo/trade-journal). The original engine and features are retained under MIT; XT is not an official LuxAlgo product.
 
 [![npm](https://img.shields.io/npm/v/@luxalgo/journal-core?label=npm&color=white)](https://www.npmjs.com/package/@luxalgo/journal-core)
 [![License](https://img.shields.io/badge/license-MIT-white)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/lang-TypeScript-white)](packages/core/src/types.ts)
 [![SQLite](https://img.shields.io/badge/db-SQLite-white)](#quickstart)
 
-[Homepage](https://www.luxalgo.com/trade-journal/) · [Quickstart](#quickstart) · [Features](#features) · [Screenshots](#screenshots) · [How it works](#how-it-works) · [Migrate](#migrating-from-tradezella-or-tradervue) · [Edge Score](docs/edge-score.md) · [Contributing](CONTRIBUTING.md)
+[Upstream homepage](https://www.luxalgo.com/trade-journal/) · [Quickstart](#quickstart) · [Features](#features) · [Screenshots](#screenshots) · [How it works](#how-it-works) · [Migrate](#migrating-from-tradezella-or-tradervue) · [Edge Score](docs/edge-score.md) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -31,11 +27,13 @@ _Dashboard with generated demo data. All screenshots below use synthetic records
 
 ## Quickstart
 
+**Windows: [download this project ZIP](https://github.com/kaixiang13140-pixel/xt-trade-journal-ai/archive/refs/heads/main.zip), extract it, then double-click `Start-XT.cmd`.** The launcher checks Node.js (installs LTS with Windows Package Manager if needed), uses the pinned pnpm without a global install, installs dependencies, checks SQLite, starts the local app, and opens your browser when ready. Keep the command window open. [中文启动说明](docs/xt-windows-start.md).
+
 > **Prefer not to self-host?** A free hosted journal is available inside [LuxAlgo](https://app.luxalgo.com), alongside Quant Charts. Everything below is for running your own copy; this README describes the code in this checkout. See the [platform announcement](https://www.luxalgo.com/blog/luxalgo-charting-platform/) for hosted product context.
 
 ```bash
-git clone https://github.com/LuxAlgo/trade-journal
-cd trade-journal
+git clone https://github.com/kaixiang13140-pixel/xt-trade-journal-ai
+cd xt-trade-journal-ai
 pnpm install --frozen-lockfile
 pnpm dev
 # http://localhost:3000
