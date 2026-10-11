@@ -31,6 +31,9 @@ function config() {
 }
 
 export const POST = handler(async (request: Request) => {
+  const host = new URL(request.url).hostname;
+  if (!["localhost", "127.0.0.1", "::1", "[::1]"].includes(host))
+    return bad("Local test only.", 404);
   if (process.env.NODE_ENV !== "development" || !customerMode())
     return bad("Cloud auth test is available only in local customer development mode.", 404);
 
