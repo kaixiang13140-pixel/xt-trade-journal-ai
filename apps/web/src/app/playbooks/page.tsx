@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { Suspense, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { AdherenceReport } from "@/components/adherence-report";
@@ -57,7 +58,7 @@ function Playbooks() {
         actions={
           <Button size="sm" onClick={() => setOpen(true)}>
             <Plus />
-            New playbook
+            <I18nText text="New playbook" />
           </Button>
         }
       />
@@ -118,7 +119,9 @@ function Playbooks() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>New playbook</DialogTitle>
+            <DialogTitle>
+              <I18nText text="New playbook" />
+            </DialogTitle>
           </DialogHeader>
           <div className="space-y-3">
             <Input

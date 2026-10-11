@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { useEffect, useState } from "react";
 import { CurrencyPicker } from "./currency-picker";
 import { Button } from "./ui/button";
@@ -70,7 +71,9 @@ export function CurrencySettings() {
   return (
     <Card id="currency-conversion" className="scroll-mt-20">
       <CardHeader>
-        <CardTitle>Currency conversion</CardTitle>
+        <CardTitle>
+          <I18nText text="Currency conversion" />
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">
@@ -89,7 +92,9 @@ export function CurrencySettings() {
             Convert dashboard and calendar to the reporting currency
           </label>
           <div className="space-y-1">
-            <Label htmlFor="reporting-currency">Reporting currency</Label>
+            <Label htmlFor="reporting-currency">
+              <I18nText text="Reporting currency" />
+            </Label>
             <CurrencyPicker
               id="reporting-currency"
               value={reportingCurrency}

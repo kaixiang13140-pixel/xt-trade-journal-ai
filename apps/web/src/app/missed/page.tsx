@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { OptionSelect } from "@/components/ui/option-select";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -146,7 +147,7 @@ function Missed() {
                   </CardTitle>
                   <div className="flex gap-2">
                     <Button variant="ghost" size="sm" onClick={() => edit(t)}>
-                      Edit
+                      <I18nText text="Edit" />
                     </Button>
                     <Button
                       variant="ghost"
@@ -223,8 +224,12 @@ function Missed() {
                   value={draft.direction}
                   onValueChange={(next) => setDraft({ ...draft, direction: next })}
                 >
-                  <option value="long">Long</option>
-                  <option value="short">Short</option>
+                  <option value="long">
+                    <I18nText text="Long" />
+                  </option>
+                  <option value="short">
+                    <I18nText text="Short" />
+                  </option>
                 </OptionSelect>
               </Field>
               {formField("observedAt", "Observed at (device time)", "datetime-local")}

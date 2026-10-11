@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { AiNotice } from "@/components/ai-notice";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -169,7 +170,9 @@ function TradeView({ tradeKey }: { tradeKey: string }) {
           <Card>
             <CardContent className="flex flex-wrap items-center gap-x-8 gap-y-3 py-4">
               <div>
-                <div className="text-xs text-muted-foreground">Net P&L</div>
+                <div className="text-xs text-muted-foreground">
+                  <I18nText text="Net P&L" />
+                </div>
                 <Pnl value={trade.netPnl} className="text-2xl font-semibold" />
               </div>
               <Badge
@@ -218,18 +221,28 @@ function TradeView({ tradeKey }: { tradeKey: string }) {
 
           <Card>
             <CardHeader>
-              <CardTitle>Executions</CardTitle>
+              <CardTitle>
+                <I18nText text="Executions" />
+              </CardTitle>
               <p className="text-xs text-muted-foreground">Times in {timeZone}</p>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Time</TableHead>
+                    <TableHead>
+                      <I18nText text="Time" />
+                    </TableHead>
                     <TableHead>Side</TableHead>
-                    <TableHead>Quantity</TableHead>
-                    <TableHead>Price</TableHead>
-                    <TableHead>Fee</TableHead>
+                    <TableHead>
+                      <I18nText text="Quantity" />
+                    </TableHead>
+                    <TableHead>
+                      <I18nText text="Price" />
+                    </TableHead>
+                    <TableHead>
+                      <I18nText text="Fee" />
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -360,7 +373,9 @@ function AnnotationsCard({
 
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-xs text-muted-foreground">Stop loss</label>
+            <label className="text-xs text-muted-foreground">
+              <I18nText text="Stop loss" />
+            </label>
             <MonetaryField>
               <Input
                 value={stopLoss}
@@ -376,7 +391,9 @@ function AnnotationsCard({
             </MonetaryField>
           </div>
           <div>
-            <label className="text-xs text-muted-foreground">Profit target</label>
+            <label className="text-xs text-muted-foreground">
+              <I18nText text="Profit target" />
+            </label>
             <MonetaryField>
               <Input
                 value={profitTarget}
@@ -425,7 +442,9 @@ function AnnotationsCard({
           />
         </div>
         <div>
-          <label className="text-xs text-muted-foreground">Mistakes</label>
+          <label className="text-xs text-muted-foreground">
+            <I18nText text="Mistakes" />
+          </label>
           <Input
             value={mistakes}
             onChange={(event) => {
@@ -438,7 +457,9 @@ function AnnotationsCard({
 
         <div>
           <div className="mb-1 flex items-center justify-between">
-            <label className="text-xs text-muted-foreground">Notes</label>
+            <label className="text-xs text-muted-foreground">
+              <I18nText text="Notes" />
+            </label>
             <VoiceNote
               onPrepare={() => noteEditor.current?.focus()}
               onText={(text) => {

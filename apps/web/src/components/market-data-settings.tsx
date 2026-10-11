@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { useState } from "react";
 import { useApi, postJson } from "@/lib/use-api";
 import type { MarketConnection } from "@/lib/market-data";
@@ -18,7 +19,9 @@ export function MarketDataSettings() {
   return (
     <Card id="market-data" className="scroll-mt-24">
       <CardHeader>
-        <CardTitle>Market data</CardTitle>
+        <CardTitle>
+          <I18nText text="Market data" />
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">

@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { dayKeyOf, FILTER_KEYS, readFilters, type AnalysisFilters } from "@luxalgo/journal-core";
@@ -66,7 +67,9 @@ export function FilterBar({ title, actions }: { title: string; actions?: React.R
   return (
     <>
       <div className="journal-filter-bar sticky z-10 flex min-h-14 min-w-0 flex-wrap items-center gap-2 border-b bg-background/95 px-4 py-2 backdrop-blur">
-        <h1 className="mr-auto min-w-0 text-base font-semibold tracking-tight">{title}</h1>
+        <h1 className="mr-auto min-w-0 text-base font-semibold tracking-tight">
+          <I18nText text={title} />
+        </h1>
         {showFilters && (
           <>
             <AccountSelector />
@@ -99,7 +102,8 @@ export function FilterBar({ title, actions }: { title: string; actions?: React.R
               }}
             >
               <SlidersHorizontal className="h-3.5 w-3.5" />
-              Filters{count > 0 ? ` · ${count}` : ""}
+              <I18nText text="Filters" />
+              {count > 0 ? ` · ${count}` : ""}
             </Button>
           </>
         )}

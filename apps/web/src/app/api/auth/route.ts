@@ -1,9 +1,11 @@
 import { cookies } from "next/headers";
 import { AUTH_COOKIE, passwordConfigured, sessionToken, verifyPassword } from "@/server/auth";
 import { bad, handler, ok } from "@/server/api";
+import { customerMode } from "@/server/tenant";
 
 export const POST = handler(
   async (request: Request) => {
+    if (customerMode()) return bad("Use the customer sign-in page.", 403);
     if (!passwordConfigured()) return ok({ authenticated: true });
     const { password } = (await request.json()) as { password?: string };
     if (typeof password !== "string" || !password || !verifyPassword(password))

@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FlaskConical, Settings2, WalletCards } from "lucide-react";
@@ -71,7 +72,7 @@ export function AccountSelector() {
         </SelectTrigger>
         <SelectContent className="rounded-2xl border-white/10 p-1 shadow-2xl" align="end">
           <SelectItem value="all" className="rounded-lg text-xs">
-            All accounts
+            <I18nText text="All accounts" />
           </SelectItem>
           {selected.length > 1 && (
             <SelectItem value="multiple" disabled className="text-xs">

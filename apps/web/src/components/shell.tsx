@@ -31,6 +31,8 @@ import { ThemeToggle } from "./theme";
 import { PageTransition } from "./page-transition";
 import { Button } from "./ui/button";
 import { HoverHint } from "./ui/tooltip";
+import { I18nText, LanguageToggle, useLanguage } from "./language";
+import { CustomerSession } from "./customer-session";
 
 const NAV = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -66,8 +68,9 @@ function NavLink({
   active: boolean;
   collapsed?: boolean;
 }) {
+  const { t } = useLanguage();
   return (
-    <HoverHint content={collapsed ? label : null} side="right">
+    <HoverHint content={collapsed ? t(label) : null} side="right">
       <Link
         href={href}
         aria-current={active ? "page" : undefined}
@@ -79,7 +82,9 @@ function NavLink({
         )}
       >
         <Icon className={cn("h-4 w-4", active && "text-brand")} />
-        <span className="journal-sidebar-label">{label}</span>
+        <span className="journal-sidebar-label">
+          <I18nText text={label} />
+        </span>
       </Link>
     </HoverHint>
   );
@@ -191,7 +196,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </a>
       </div>
       <div>Built on LuxAlgo’s open-source engine.</div>
-      <div>Not investment advice.</div>
+      <div>
+        <I18nText text="Not investment advice." />
+      </div>
     </div>
   );
   return (
@@ -232,8 +239,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </div>
               {navigation()}
               <div className="border-t p-3">
+                <LanguageToggle />
                 <PrivacyToggle />
               </div>
+              <CustomerSession />
               {footer}
             </DialogPrimitive.Content>
           </DialogPrimitive.Portal>
@@ -245,6 +254,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <XTMark className="hidden h-4 w-[18px] shrink-0 min-[380px]:block" />
           <span className="truncate">XT Journal AI</span>
         </Link>
+        <LanguageToggle compact />
+        <CustomerSession compact />
         <PrivacyToggle compact />
         <ThemeToggle iconOnly />
       </header>
@@ -281,10 +292,12 @@ export function Shell({ children }: { children: React.ReactNode }) {
         {navigation(sidebarCollapsed)}
         <div className="journal-sidebar-privacy border-t p-3">
           <div className="w-full space-y-1">
+            <LanguageToggle compact={sidebarCollapsed} />
             <ThemeToggle iconOnly={sidebarCollapsed} />
             <PrivacyToggle iconOnly={sidebarCollapsed} />
           </div>
         </div>
+        <CustomerSession compact={sidebarCollapsed} />
         {footer}
       </aside>
       <PageTransition>{children}</PageTransition>

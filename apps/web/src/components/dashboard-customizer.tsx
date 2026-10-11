@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { forwardRef, useId, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import {
@@ -69,7 +70,7 @@ export function DashboardCustomizer(props: DashboardCustomizerProps) {
       <Popover.Trigger asChild>
         <Button type="button" variant="outline" size="sm" className="dashboard-customize-trigger">
           <Settings2 />
-          Customize
+          <I18nText text="Customize" />
           <ChevronDown className="dashboard-customize-chevron" />
         </Button>
       </Popover.Trigger>

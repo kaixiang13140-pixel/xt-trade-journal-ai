@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -231,7 +232,7 @@ export function PerformanceTrendsReport({ query }: { query: string }) {
                           Window / closing trade
                         </th>
                         <th scope="col" className="px-2 text-right">
-                          Win rate
+                          <I18nText text="Win rate" />
                         </th>
                         {monetary && (
                           <th scope="col" className="pl-2 text-right">

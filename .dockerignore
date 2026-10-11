@@ -11,3 +11,6 @@ data
 **/*.db
 **/*.db-*
 **/.env*
+customer-data
+**/*.sqlite
+**/*.sqlite-*

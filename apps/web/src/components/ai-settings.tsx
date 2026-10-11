@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { useEffect, useState } from "react";
 import {
   AI_DEFAULT_MODELS,
@@ -81,7 +82,9 @@ export function AiSettings() {
         )}
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="space-y-1">
-            <Label htmlFor="ai-provider">Provider</Label>
+            <Label htmlFor="ai-provider">
+              <I18nText text="Provider" />
+            </Label>
             <OptionSelect
               id="ai-provider"
               value={provider}
@@ -121,7 +124,10 @@ export function AiSettings() {
           key.
         </p>
         <div className="space-y-1">
-          <Label htmlFor="ai-api-key">{name} API key</Label>
+          <Label htmlFor="ai-api-key">
+            {name}
+            <I18nText text=" API key" />
+          </Label>
           <Input
             id="ai-api-key"
             type="password"
@@ -168,7 +174,8 @@ export function AiSettings() {
           </Button>
           {connection?.source === "saved" && (
             <Button variant="outline" disabled={disabled} onClick={() => save(true)}>
-              Remove {name} key
+              <I18nText text="Remove" />
+              {name} key
             </Button>
           )}
         </div>

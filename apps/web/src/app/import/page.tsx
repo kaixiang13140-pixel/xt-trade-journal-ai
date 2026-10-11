@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FileUp, Landmark, PencilLine } from "lucide-react";
@@ -91,7 +92,7 @@ function ImportView() {
           <TabsList>
             <TabsTrigger value="file" className="max-sm:px-2 max-sm:text-xs">
               <FileUp className="mr-1.5 hidden h-4 w-4 min-[420px]:block" />
-              File upload
+              <I18nText text="File upload" />
             </TabsTrigger>
             <TabsTrigger value="sync" className="max-sm:px-2 max-sm:text-xs">
               <Landmark className="mr-1.5 hidden h-4 w-4 min-[420px]:block" />
@@ -446,7 +447,7 @@ function FileImport() {
           {preview?.needsSymbol && (
             <div className="flex flex-wrap items-end gap-2">
               <label className="min-w-0 flex-1 text-xs text-muted-foreground">
-                Symbol
+                <I18nText text="Symbol" />
                 <Input
                   value={symbol}
                   onChange={(event) => setSymbol(event.target.value.toUpperCase())}
@@ -460,7 +461,7 @@ function FileImport() {
                 onClick={previewFile}
                 disabled={busy || !symbol.trim()}
               >
-                Preview
+                <I18nText text="Preview" />
               </Button>
             </div>
           )}
@@ -771,7 +772,9 @@ function BrokerConnect() {
               </p>
             )}
             <div>
-              <Label className="mb-1 block text-xs text-muted-foreground">Account name</Label>
+              <Label className="mb-1 block text-xs text-muted-foreground">
+                <I18nText text="Account name" />
+              </Label>
               <Input
                 value={name}
                 onChange={(event) => setName(event.target.value)}

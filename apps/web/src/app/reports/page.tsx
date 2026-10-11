@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { OptionSelect } from "@/components/ui/option-select";
 
 import { HoverHint } from "@/components/ui/tooltip";
@@ -471,7 +472,9 @@ function Comparison({ initial }: { initial: AnalysisFilters }) {
                   {group.result.error}
                 </p>
               ) : group.result.loading ? (
-                <p>Loading…</p>
+                <p>
+                  <I18nText text="Loading…" />
+                </p>
               ) : group.result.data && !multi ? (
                 <Summary data={group.result.data} />
               ) : null}
@@ -524,7 +527,7 @@ function Comparison({ initial }: { initial: AnalysisFilters }) {
           <FilterFields value={draft} onChange={setDraft} />
           <div className="flex justify-between">
             <Button variant="ghost" onClick={() => setDraft({})}>
-              Clear
+              <I18nText text="Clear" />
             </Button>
             <Button
               onClick={() => {

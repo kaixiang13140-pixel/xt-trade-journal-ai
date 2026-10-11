@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { Vela } from "@luxalgo/vela";
 import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw, SkipForward } from "lucide-react";
@@ -260,7 +261,7 @@ export function TradeMarketData({
                   </Button>
                   {busy && (
                     <Button variant="outline" onClick={invalidate}>
-                      Cancel
+                      <I18nText text="Cancel" />
                     </Button>
                   )}
                   {result && (

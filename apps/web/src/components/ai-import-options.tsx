@@ -1,4 +1,6 @@
 "use client";
+
+import { I18nText } from "@/components/language";
 import { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { Settings2, X } from "lucide-react";
@@ -114,7 +116,10 @@ export function AiImportOptions({
               </div>
             </div>
             <div className="space-y-1">
-              <Label htmlFor="import-ai-key">{AI_PROVIDER_NAMES[value.provider]} API key</Label>
+              <Label htmlFor="import-ai-key">
+                {AI_PROVIDER_NAMES[value.provider]}
+                <I18nText text=" API key" />
+              </Label>
               <Input
                 id="import-ai-key"
                 type="password"
@@ -132,7 +137,7 @@ export function AiImportOptions({
               <p className="text-xs text-muted-foreground">
                 Keys entered here are used for this upload session only. Manage saved keys in{" "}
                 <a href="/settings#ai-settings" className="underline">
-                  Settings
+                  <I18nText text="Settings" />
                 </a>
                 .
               </p>

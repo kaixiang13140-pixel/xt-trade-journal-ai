@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import Link from "next/link";
 import { Suspense, useState } from "react";
 import type {
@@ -150,7 +151,9 @@ function DashboardContent({
         <div className="grid gap-3 p-4 sm:grid-cols-2">
           <Card>
             <CardHeader>
-              <CardTitle>All accounts</CardTitle>
+              <CardTitle>
+                <I18nText text="All accounts" />
+              </CardTitle>
             </CardHeader>
             <CardContent className="text-sm">
               {closed} closed trades · {closed ? fmtPercent(wins / closed) : "–"} trade win rate
@@ -396,7 +399,9 @@ function DashboardContent({
               <Card className="dashboard-visual-card h-full">
                 <CardHeader className="flex-row items-center justify-between">
                   <div className="flex min-w-0 items-center gap-1">
-                    <CardTitle>Edge Score</CardTitle>
+                    <CardTitle>
+                      <I18nText text="Edge Score" />
+                    </CardTitle>
                     <HelpHint heading="Edge Score">
                       A 0–100 score combining win rate, profit factor, average win/loss, drawdown,
                       recovery, and consistency. Requires at least five closed trades.
@@ -440,7 +445,9 @@ function DashboardContent({
             content: (
               <Card className="dashboard-visual-card h-full">
                 <CardHeader className="flex-row items-center justify-between">
-                  <CardTitle>Daily net cumulative P&L</CardTitle>
+                  <CardTitle>
+                    <I18nText text="Daily net cumulative P&L" />
+                  </CardTitle>
                   <HelpHint heading="Cumulative P&L">
                     Running total of net profit and loss over the selected period. The drawdown bars
                     below show declines from the running equity peak.
@@ -466,7 +473,9 @@ function DashboardContent({
             content: (
               <Card className="dashboard-visual-card h-full">
                 <CardHeader className="flex-row items-center justify-between">
-                  <CardTitle>Net daily P&L</CardTitle>
+                  <CardTitle>
+                    <I18nText text="Net daily P&L" />
+                  </CardTitle>
                   <HelpHint heading="Daily P&L">
                     Net profit or loss for each trading day. Bars above zero are profitable; bars
                     below zero are losses.
@@ -500,7 +509,7 @@ function DashboardContent({
                     href={`/calendar?${query}`}
                     className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
                   >
-                    Full calendar
+                    <I18nText text="Full calendar" />
                   </Link>
                 </CardHeader>
                 <CardContent>
@@ -522,16 +531,18 @@ function DashboardContent({
             content: (
               <Card className="h-full">
                 <CardHeader>
-                  <CardTitle>Activity</CardTitle>
+                  <CardTitle>
+                    <I18nText text="Activity" />
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Tabs defaultValue="recent">
                     <TabsList className="h-8">
                       <TabsTrigger value="recent" className="text-xs">
-                        Recent trades
+                        <I18nText text="Recent trades" />
                       </TabsTrigger>
                       <TabsTrigger value="open" className="text-xs">
-                        Open positions
+                        <I18nText text="Open positions" />
                       </TabsTrigger>
                     </TabsList>
                     <TabsContent value="recent" className="space-y-1">
@@ -744,7 +755,9 @@ function DashboardContent({
             content: (
               <Card className="h-full">
                 <CardHeader className="flex-row items-center justify-between">
-                  <CardTitle>Trade time performance</CardTitle>
+                  <CardTitle>
+                    <I18nText text="Trade time performance" />
+                  </CardTitle>
                   <HelpHint heading="Trade time performance">
                     Trades grouped by their opening hour. The upper chart shows net P&L; the lower
                     chart shows trade count.
@@ -781,7 +794,9 @@ function StatHeader({
 }) {
   return (
     <CardHeader className="flex-row items-center justify-between space-y-0">
-      <CardTitle>{title}</CardTitle>
+      <CardTitle>
+        <I18nText text={title} />
+      </CardTitle>
       <Tooltip>
         <TooltipTrigger className="cursor-help" aria-label={`About ${title}`}>
           <Icon className="h-3.5 w-3.5 text-muted-foreground/70" />

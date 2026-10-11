@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { useEffect, useId, useState } from "react";
 import dynamic from "next/dynamic";
 import * as Popover from "@radix-ui/react-popover";
@@ -111,7 +112,7 @@ export function DatePicker({
           />
           <div className="mt-3 flex items-center justify-between border-t pt-2">
             <Button variant="ghost" size="sm" disabled={!draft} onClick={() => select("")}>
-              Clear
+              <I18nText text="Clear" />
             </Button>
             <Button
               variant="ghost"
@@ -119,7 +120,7 @@ export function DatePicker({
               disabled={!allowed(today)}
               onClick={() => select(today)}
             >
-              Today
+              <I18nText text="Today" />
             </Button>
           </div>
         </Popover.Content>

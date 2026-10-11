@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import type { AnalysisFilters, BucketStats } from "@luxalgo/journal-core";
 import { TimeHeatmap } from "./charts/time-heatmap";
 import { ReviewExport } from "./review-export";
@@ -85,7 +86,9 @@ export function ReportOverview({ query, filters }: { query: string; filters: Ana
       <div className="grid gap-3 lg:grid-cols-2">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Trade time performance</CardTitle>
+            <CardTitle>
+              <I18nText text="Trade time performance" />
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <TimeHeatmap hours={data.buckets.hour} currency={currency} />
@@ -108,9 +111,15 @@ export function ReportOverview({ query, filters }: { query: string; filters: Ana
                   <TableHeader>
                     <TableRow>
                       <TableHead>{section.title.replace("By ", "")}</TableHead>
-                      <TableHead className="text-right">Trades</TableHead>
-                      <TableHead className="text-right">Win %</TableHead>
-                      <TableHead className="text-right">Net P&L</TableHead>
+                      <TableHead className="text-right">
+                        <I18nText text="Trades" />
+                      </TableHead>
+                      <TableHead className="text-right">
+                        <I18nText text="Win %" />
+                      </TableHead>
+                      <TableHead className="text-right">
+                        <I18nText text="Net P&L" />
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>

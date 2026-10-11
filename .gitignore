@@ -25,3 +25,10 @@ data/
 .DS_Store
 *.log
 coverage/
+
+# Customer mode databases and deployment secrets
+customer-data/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+.env.customers

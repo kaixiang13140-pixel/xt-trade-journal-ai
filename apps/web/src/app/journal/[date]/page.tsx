@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { AiRecap } from "@/components/ai-recap";
 
 import Link from "next/link";
@@ -134,7 +135,9 @@ function JournalDay({ date }: { date: string }) {
           {data && data.trades.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Trades</CardTitle>
+                <CardTitle>
+                  <I18nText text="Trades" />
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-1">
                 {data.trades.map((trade) => (

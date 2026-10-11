@@ -1,4 +1,6 @@
 "use client";
+
+import { I18nText } from "@/components/language";
 import { useState, type ReactNode } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -762,7 +764,8 @@ function ImportForm({ close, refresh }: Props) {
             ))}
           </div>
           <Button disabled={busy || result.imported === 0} onClick={() => void act("import")}>
-            Import {result.imported} records
+            <I18nText text="Import" />
+            {result.imported} records
           </Button>
         </>
       )}

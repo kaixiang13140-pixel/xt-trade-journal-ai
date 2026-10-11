@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
@@ -78,23 +79,27 @@ export function TradeNavigation({ tradeKey }: { tradeKey: string }) {
         {data?.prevKey ? (
           <Button asChild variant="outline" size="sm">
             <Link href={href(data.prevKey)} aria-label="Previous trade" rel="prev">
-              <ChevronLeft /> Previous
+              <ChevronLeft />
+              <I18nText text="Previous" />
             </Link>
           </Button>
         ) : (
           <Button variant="outline" size="sm" disabled aria-label="Previous trade">
-            <ChevronLeft /> Previous
+            <ChevronLeft />
+            <I18nText text="Previous" />
           </Button>
         )}
         {data?.nextKey ? (
           <Button asChild variant="outline" size="sm">
             <Link href={href(data.nextKey)} aria-label="Next trade" rel="next">
-              Next <ChevronRight />
+              <I18nText text="Next" />
+              <ChevronRight />
             </Link>
           </Button>
         ) : (
           <Button variant="outline" size="sm" disabled aria-label="Next trade">
-            Next <ChevronRight />
+            <I18nText text="Next" />
+            <ChevronRight />
           </Button>
         )}
       </div>

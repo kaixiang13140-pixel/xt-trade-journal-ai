@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState, type ReactNode } from "react";
@@ -259,10 +260,10 @@ export function CalendarPerformance({ data, query }: { data: CalendarResponse; q
                                 Closing day
                               </th>
                               <th scope="col" className="text-right font-medium">
-                                Trades
+                                <I18nText text="Trades" />
                               </th>
                               <th scope="col" className="text-right font-medium">
-                                Net P&L
+                                <I18nText text="Net P&L" />
                               </th>
                             </tr>
                           </thead>

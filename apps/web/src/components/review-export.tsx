@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { useEffect, useRef, useState } from "react";
 import { Download, ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -95,7 +96,8 @@ export function ReviewExport({
             <div key={f.url} className="space-y-3">
               <Button asChild size="sm">
                 <a href={f.url} download={f.filename}>
-                  Download {f.type === "application/pdf" ? "PDF" : "PNG"}
+                  <I18nText text="Download" />
+                  {f.type === "application/pdf" ? "PDF" : "PNG"}
                   {files.length > 1 ? ` · ${i + 1}/${files.length}` : ""}
                 </a>
               </Button>

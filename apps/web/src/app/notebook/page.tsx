@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { OptionSelect } from "@/components/ui/option-select";
 
 import { Suspense, useRef, useState } from "react";
@@ -130,7 +131,7 @@ function Notebook() {
               disabled={deletingFolder}
               onClick={() => setFolderToDelete(null)}
             >
-              Cancel
+              <I18nText text="Cancel" />
             </Button>
             <Button
               variant="destructive"
@@ -144,7 +145,9 @@ function Notebook() {
       </Dialog>
       <Dialog open={folderOpen} onOpenChange={(open) => !creatingFolder && setFolderOpen(open)}>
         <DialogContent>
-          <DialogTitle>New folder</DialogTitle>
+          <DialogTitle>
+            <I18nText text="New folder" />
+          </DialogTitle>
           <DialogDescription>Organize your notes in a named folder.</DialogDescription>
           <form
             className="space-y-4"
@@ -179,7 +182,7 @@ function Notebook() {
                 disabled={creatingFolder}
                 onClick={() => setFolderOpen(false)}
               >
-                Cancel
+                <I18nText text="Cancel" />
               </Button>
               <Button type="submit" disabled={creatingFolder || !folderName.trim()}>
                 {creatingFolder ? "Creating…" : "Create folder"}
@@ -193,7 +196,7 @@ function Notebook() {
         actions={
           <Button size="sm" onClick={createNote}>
             <Plus />
-            New note
+            <I18nText text="New note" />
           </Button>
         }
       />
@@ -249,7 +252,7 @@ function Notebook() {
             }}
           >
             <FolderPlus />
-            New folder
+            <I18nText text="New folder" />
           </Button>
         </div>
 
@@ -404,7 +407,7 @@ function NoteEditor({ note, onChanged }: { note: NoteRow; onChanged: () => void 
               }
             }}
           >
-            Delete
+            <I18nText text="Delete" />
           </Button>
         </div>
         <RichEditor

@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -156,7 +157,7 @@ export function TradeExplorer({ query }: { query: string }) {
             disabled={shownPage === 0}
             onClick={() => setPage(shownPage - 1)}
           >
-            Previous
+            <I18nText text="Previous" />
           </Button>
           <p aria-live="polite" className="text-xs text-muted-foreground">
             Page {shownPage + 1} of {pages}
@@ -167,7 +168,7 @@ export function TradeExplorer({ query }: { query: string }) {
             disabled={shownPage === pages - 1}
             onClick={() => setPage(shownPage + 1)}
           >
-            Next
+            <I18nText text="Next" />
           </Button>
         </div>
       )}
@@ -177,7 +178,7 @@ export function TradeExplorer({ query }: { query: string }) {
     <section className="space-y-4" aria-labelledby="trade-explorer-title" data-trade-explorer>
       <div>
         <h2 id="trade-explorer-title" className="text-lg font-semibold">
-          Trade explorer
+          <I18nText text="Trade explorer" />
         </h2>
         <p className="mt-1 text-xs text-muted-foreground">
           Compare individual trades, not group averages · Active account and filters ·{" "}
@@ -248,7 +249,9 @@ export function TradeExplorer({ query }: { query: string }) {
                   }}
                 >
                   <option value="durationMinutes">Duration (minutes)</option>
-                  <option value="entryMinute">Entry time</option>
+                  <option value="entryMinute">
+                    <I18nText text="Entry time" />
+                  </option>
                   <option value="mae">Estimated MAE</option>
                   <option value="mfe">Estimated MFE</option>
                 </OptionSelect>
@@ -269,7 +272,9 @@ export function TradeExplorer({ query }: { query: string }) {
                     setPage(0);
                   }}
                 >
-                  <option value="netPnl">Net P&L</option>
+                  <option value="netPnl">
+                    <I18nText text="Net P&L" />
+                  </option>
                   <option value="realizedR">Realized R</option>
                   <option value="mae">Estimated MAE</option>
                   <option value="mfe">Estimated MFE</option>

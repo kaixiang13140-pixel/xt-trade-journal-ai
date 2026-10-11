@@ -6,6 +6,7 @@ import { PrivacyProvider } from "@/components/privacy";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
+import { LanguageProvider } from "@/components/language";
 
 export const metadata: Metadata = {
   title: "XT Trade Journal AI",
@@ -24,7 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Suspense>
             <ThemeProvider>
               <PrivacyProvider>
-                <Shell>{children}</Shell>
+                <LanguageProvider>
+                  <Shell>{children}</Shell>
+                </LanguageProvider>
               </PrivacyProvider>
             </ThemeProvider>
           </Suspense>

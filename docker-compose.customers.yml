@@ -1,0 +1,31 @@
+services:
+  journal:
+    build: .
+    expose:
+      - "3000"
+    volumes:
+      - customer_data:/data
+    environment:
+      XT_MULTIUSER: "1"
+      XT_REGISTRATION_CODE: ${XT_REGISTRATION_CODE:?Set a private registration code}
+      JOURNAL_DATA_DIR: /data
+    restart: unless-stopped
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      XT_DOMAIN: ${XT_DOMAIN:?Set your public domain}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - journal
+    restart: unless-stopped
+volumes:
+  customer_data:
+  caddy_data:
+  caddy_config:

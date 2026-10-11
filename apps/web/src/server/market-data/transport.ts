@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { currentCustomer } from "@/server/tenant";
 import { MarketDataError } from "./provider";
 
 type Job = { host: string; signal: AbortSignal; start: () => void; reject: () => void };
@@ -77,10 +78,10 @@ export function createMarketTransport({ minIntervalMs = 350 } = {}) {
     const host = new URL(url).host;
     const identity = JSON.stringify(Object.entries(headers).sort(([a], [b]) => a.localeCompare(b)));
     const scope = createHash("sha256")
-      .update(host + identity)
+      .update((currentCustomer() ?? "local") + host + identity)
       .digest("hex");
     const key = createHash("sha256")
-      .update(url + identity)
+      .update(scope + url + identity)
       .digest("hex");
     const cached = options.cache !== false && cache.get(key);
     if (cached && cached.expires > Date.now()) {

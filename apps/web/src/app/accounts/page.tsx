@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { Suspense, useState } from "react";
 import { Archive, ArchiveRestore, Plus, RefreshCw, Trash2 } from "lucide-react";
 import { AccountCreateForm } from "@/components/account-create-form";
@@ -84,14 +85,16 @@ function Accounts() {
         actions={
           <Button size="sm" onClick={() => setCreating(true)}>
             <Plus />
-            New account
+            <I18nText text="New account" />
           </Button>
         }
       />
       <Dialog open={creating} onOpenChange={setCreating}>
         <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
-            <DialogTitle>New account</DialogTitle>
+            <DialogTitle>
+              <I18nText text="New account" />
+            </DialogTitle>
             <DialogDescription>
               Create an account for manual trades or file imports.
             </DialogDescription>
@@ -185,7 +188,7 @@ function Accounts() {
               <div className="grid grid-cols-1 items-end gap-3 sm:grid-cols-2">
                 <div className="min-w-0">
                   <label className="mb-1 block text-xs text-muted-foreground">
-                    Initial balance (anchors drawdown %)
+                    <I18nText text="Initial balance (anchors drawdown %)" />
                   </label>
                   <MonetaryField>
                     <Input
@@ -242,7 +245,7 @@ function Accounts() {
                     }
                   }}
                 >
-                  Clear trades
+                  <I18nText text="Clear trades" />
                 </Button>
                 <Button
                   variant="outline"

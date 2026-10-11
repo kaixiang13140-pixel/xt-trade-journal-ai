@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
@@ -316,7 +317,9 @@ function Trades() {
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle>Profit factor</CardTitle>
+                <CardTitle>
+                  <I18nText text="Profit factor" />
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <span className="text-xl font-semibold tnum">
@@ -330,7 +333,9 @@ function Trades() {
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle>Trade win %</CardTitle>
+                <CardTitle>
+                  <I18nText text="Trade win %" />
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <span className="text-xl font-semibold tnum">{fmtPercent(m.winRate)}</span>
@@ -338,7 +343,9 @@ function Trades() {
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle>Avg win / loss</CardTitle>
+                <CardTitle>
+                  <I18nText text="Avg win / loss" />
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <span className="text-xl font-semibold tnum">
@@ -414,7 +421,7 @@ function Trades() {
                 }}
               >
                 <Trash2 />
-                Delete
+                <I18nText text="Delete" />
               </Button>
             </CardContent>
           </Card>
@@ -512,7 +519,7 @@ function Trades() {
                     disabled={currentPage === 0}
                     onClick={() => setPage(currentPage - 1)}
                   >
-                    Previous
+                    <I18nText text="Previous" />
                   </Button>
                   <span>
                     Page {currentPage + 1} of {pageCount}
@@ -523,7 +530,7 @@ function Trades() {
                     disabled={currentPage + 1 === pageCount}
                     onClick={() => setPage(currentPage + 1)}
                   >
-                    Next
+                    <I18nText text="Next" />
                   </Button>
                 </div>
               </div>

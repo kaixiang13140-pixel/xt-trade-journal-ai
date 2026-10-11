@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { useId, useRef, useState, type CSSProperties } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { Check, ChevronDown, LayoutTemplate, Save, Search, X } from "lucide-react";
@@ -59,7 +60,9 @@ export function DashboardSavedLayouts({
           className="dashboard-customize-trigger"
           aria-label="Dashboard layouts"
         >
-          <LayoutTemplate /> Layouts <ChevronDown className="dashboard-customize-chevron" />
+          <LayoutTemplate />
+          <I18nText text=" Layouts " />
+          <ChevronDown className="dashboard-customize-chevron" />
         </Button>
       </Popover.Trigger>
       <Popover.Portal>
@@ -245,7 +248,7 @@ export function DashboardSavedLayouts({
                 disabled={!name.trim()}
               >
                 <Save className="h-3.5 w-3.5" />
-                Save
+                <I18nText text="Save" />
               </Button>
             </div>
             {saved && (

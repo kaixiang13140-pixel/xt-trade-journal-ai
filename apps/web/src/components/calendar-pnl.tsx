@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { HoverHint } from "./ui/tooltip";
 
 import Link from "next/link";
@@ -55,7 +56,7 @@ export function CalendarPnl({
           </div>
         ))}
         <div className="journal-calendar-week-heading px-1 pb-1 text-right text-muted-foreground">
-          Week
+          <I18nText text="Week" />
         </div>
         {calendar.weeks.map((week, weekIndex) => (
           <CalendarWeekRow

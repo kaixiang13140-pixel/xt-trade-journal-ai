@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db, settings } from "@/db";
 import { decryptJson, encryptJson } from "./crypto";
+import { customerMode } from "./tenant";
 import { EMPTY_DEFAULTS, type JournalDefaults } from "@/lib/journal-defaults";
 import { DEFAULT_CONVERSION, parseCurrencyConversion } from "@/lib/currencies";
 import {
@@ -57,8 +58,12 @@ export const getMultipliers = (): Record<string, number> => {
 };
 
 export const aiKeyEnvironment = (provider: AiProvider): string | null =>
-  (provider === "openai" ? process.env.OPENAI_API_KEY : process.env.ANTHROPIC_API_KEY)?.trim() ||
-  null;
+  customerMode()
+    ? null
+    : (provider === "openai"
+        ? process.env.OPENAI_API_KEY
+        : process.env.ANTHROPIC_API_KEY
+      )?.trim() || null;
 
 /** Provider keys are stored separately and encrypted like broker credentials. */
 export const getAiKey = (provider: AiProvider): string | null => {

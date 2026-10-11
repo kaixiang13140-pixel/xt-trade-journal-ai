@@ -1,5 +1,7 @@
 "use client";
 
+import { I18nText } from "@/components/language";
+
 import { useId, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -73,10 +75,16 @@ export function AccountCreateForm({
         if (!saving) void create();
       }}
     >
-      {showTitle && <h3 className="text-sm font-medium">Create account</h3>}
+      {showTitle && (
+        <h3 className="text-sm font-medium">
+          <I18nText text="Create account" />
+        </h3>
+      )}
       {!kind && (
         <div className="space-y-1">
-          <Label htmlFor={`${fieldId}-kind`}>Account type</Label>
+          <Label htmlFor={`${fieldId}-kind`}>
+            <I18nText text="Account type" />
+          </Label>
           <select
             id={`${fieldId}-kind`}
             className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
@@ -84,14 +92,20 @@ export function AccountCreateForm({
             disabled={saving}
             onChange={(event) => setAccountKind(event.target.value as "manual" | "import")}
           >
-            <option value="manual">Manual trades</option>
-            <option value="import">File import</option>
+            <option value="manual">
+              <I18nText text="Manual trades" />
+            </option>
+            <option value="import">
+              <I18nText text="File import" />
+            </option>
           </select>
         </div>
       )}
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="space-y-1">
-          <Label htmlFor={`${fieldId}-name`}>Account name</Label>
+          <Label htmlFor={`${fieldId}-name`}>
+            <I18nText text="Account name" />
+          </Label>
           <Input
             id={`${fieldId}-name`}
             autoFocus
@@ -104,7 +118,9 @@ export function AccountCreateForm({
           />
         </div>
         <div className="space-y-1">
-          <Label htmlFor={`${fieldId}-currency`}>Currency</Label>
+          <Label htmlFor={`${fieldId}-currency`}>
+            <I18nText text="Currency" />
+          </Label>
           <CurrencyPicker
             id={`${fieldId}-currency`}
             value={currency}
@@ -113,7 +129,9 @@ export function AccountCreateForm({
           />
         </div>
         <div className="space-y-1">
-          <Label htmlFor={`${fieldId}-balance`}>Starting balance</Label>
+          <Label htmlFor={`${fieldId}-balance`}>
+            <I18nText text="Starting balance" />
+          </Label>
           <Input
             id={`${fieldId}-balance`}
             required

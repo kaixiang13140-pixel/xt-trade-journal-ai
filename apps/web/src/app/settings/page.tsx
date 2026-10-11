@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { Suspense, useEffect, useRef, useState } from "react";
 import {
   ArrowLeftRight,
@@ -189,7 +190,7 @@ function Settings() {
                         <Button variant="outline" asChild>
                           <a href="/api/export" download="trade-journal-export.json">
                             <Download aria-hidden="true" />
-                            Full backup (JSON)
+                            <I18nText text="Full backup (JSON)" />
                           </a>
                         </Button>
                         <Button variant="outline" asChild>

@@ -2,6 +2,7 @@ import { createCipheriv, createDecipheriv, randomBytes, scryptSync } from "node:
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { dataDir } from "@/db";
+import { customerMode } from "./tenant";
 
 /**
  * Broker credentials at rest are AES-256-GCM encrypted. The key comes from
@@ -10,7 +11,7 @@ import { dataDir } from "@/db";
  * data directory keeps working while a leaked database file alone does not.
  */
 const keyMaterial = (): Buffer => {
-  const secret = process.env.JOURNAL_SECRET;
+  const secret = customerMode() ? undefined : process.env.JOURNAL_SECRET;
   if (secret && secret.length > 0) return scryptSync(secret, "luxalgo-trade-journal", 32);
   const dir = dataDir();
   const keyPath = join(dir, ".secret");

@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowDownLeft,
@@ -276,7 +277,7 @@ export function PropFirmTracker() {
           disabled={readOnly}
           onClick={() => setModal({ kind: "entry", entry, type: entry.kind })}
         >
-          Edit
+          <I18nText text="Edit" />
         </Button>
       )}
       {!entry.voided && entry.kind === "expense" && (
@@ -367,7 +368,7 @@ export function PropFirmTracker() {
                   onClick={() => setModal({ kind: "import" })}
                 >
                   <Upload className="h-4 w-4" />
-                  Import CSV
+                  <I18nText text="Import CSV" />
                 </Button>
                 <Button
                   size="sm"
@@ -434,7 +435,9 @@ export function PropFirmTracker() {
             )}
             <details className="rounded-xl border bg-card">
               <summary className="cursor-pointer px-4 py-3 text-sm">
-                <span className="font-medium">Filters</span>
+                <span className="font-medium">
+                  <I18nText text="Filters" />
+                </span>
                 <span className="ml-3 text-xs text-muted-foreground">
                   {firm || "All firms"} · {accountId ? name(accountId) : "All accounts"} ·{" "}
                   {from || to ? `${from || "Start"} to ${to || "Today"}` : "All dates"}
@@ -801,7 +804,9 @@ export function PropFirmTracker() {
                               <table className="w-full text-left text-sm">
                                 <thead>
                                   <tr className="border-b text-xs text-muted-foreground">
-                                    <th className="py-2">Month</th>
+                                    <th className="py-2">
+                                      <I18nText text="Month" />
+                                    </th>
                                     <th>Spent</th>
                                     <th>Refunded</th>
                                     <th>Payout cash</th>
@@ -925,7 +930,7 @@ export function PropFirmTracker() {
                                 disabled={readOnly}
                                 onClick={() => setModal({ kind: "account", account: a })}
                               >
-                                Edit
+                                <I18nText text="Edit" />
                               </Button>
                               <Button
                                 size="sm"
@@ -1075,7 +1080,9 @@ export function PropFirmTracker() {
                       <table className="w-full min-w-[740px] text-left text-sm">
                         <thead>
                           <tr className="border-b text-xs text-muted-foreground">
-                            <th className="py-2">Date</th>
+                            <th className="py-2">
+                              <I18nText text="Date" />
+                            </th>
                             <th>Firm / account</th>
                             <th>Entry</th>
                             <th>Amount</th>
@@ -1132,7 +1139,7 @@ export function PropFirmTracker() {
                       disabled={safePage === 0}
                       onClick={() => setPage(safePage - 1)}
                     >
-                      Previous
+                      <I18nText text="Previous" />
                     </Button>
                     <span className="text-xs">
                       Page {safePage + 1} of {Math.ceil(rowCount / PAGE_SIZE)}
@@ -1142,7 +1149,7 @@ export function PropFirmTracker() {
                       disabled={(safePage + 1) * PAGE_SIZE >= rowCount}
                       onClick={() => setPage(safePage + 1)}
                     >
-                      Next
+                      <I18nText text="Next" />
                     </Button>
                   </div>
                 )}

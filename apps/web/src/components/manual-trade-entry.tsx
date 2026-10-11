@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { useId, useState } from "react";
 import { MonetaryField } from "@/components/privacy";
 import { Button } from "@/components/ui/button";
@@ -77,7 +78,7 @@ export function ManualTradeEntry({ onSaved }: { onSaved: () => void }) {
       <AccountPicker value={accountId} onChange={setAccountId} kind="manual" />
       <div>
         <Label htmlFor={`${fieldId}-symbol`} className="mb-1 block text-xs text-muted-foreground">
-          Symbol
+          <I18nText text="Symbol" />
         </Label>
         <Input
           id={`${fieldId}-symbol`}
@@ -111,13 +112,17 @@ export function ManualTradeEntry({ onSaved }: { onSaved: () => void }) {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="buy">Buy</SelectItem>
-                  <SelectItem value="sell">Sell</SelectItem>
+                  <SelectItem value="buy">
+                    <I18nText text="Buy" />
+                  </SelectItem>
+                  <SelectItem value="sell">
+                    <I18nText text="Sell" />
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <label className="grid min-w-0 gap-1 text-xs text-muted-foreground">
-              Quantity
+              <I18nText text="Quantity" />
               <Input
                 placeholder="qty"
                 inputMode="decimal"
@@ -126,7 +131,7 @@ export function ManualTradeEntry({ onSaved }: { onSaved: () => void }) {
               />
             </label>
             <label className="grid min-w-0 gap-1 text-xs text-muted-foreground">
-              Price
+              <I18nText text="Price" />
               <MonetaryField>
                 <Input
                   placeholder="price"
@@ -137,7 +142,7 @@ export function ManualTradeEntry({ onSaved }: { onSaved: () => void }) {
               </MonetaryField>
             </label>
             <label className="grid min-w-0 gap-1 text-xs text-muted-foreground">
-              Fee
+              <I18nText text="Fee" />
               <MonetaryField>
                 <Input
                   placeholder="fee"
@@ -182,7 +187,7 @@ export function ManualTradeEntry({ onSaved }: { onSaved: () => void }) {
             ])
           }
         >
-          Add execution
+          <I18nText text="Add execution" />
         </Button>
         <Button size="sm" onClick={save} disabled={!valid || busy}>
           {busy ? "Saving…" : "Save trade"}

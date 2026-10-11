@@ -1,5 +1,6 @@
 "use client";
 
+import { I18nText } from "@/components/language";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -48,7 +49,9 @@ function ScopedAskJournal({ filters, timeZone }: { filters: AnalysisFilters; tim
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Ask your journal</CardTitle>
+        <CardTitle>
+          <I18nText text="Ask your journal" />
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">
         <p className="text-xs text-muted-foreground">

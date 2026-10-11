@@ -7,10 +7,12 @@ import { NextResponse, type NextRequest } from "next/server";
  * handlers gate data.
  */
 export const middleware = (request: NextRequest) => {
-  if (!process.env.JOURNAL_PASSWORD) return NextResponse.next();
+  const multiuser = process.env.XT_MULTIUSER === "1";
+  if (!multiuser && !process.env.JOURNAL_PASSWORD) return NextResponse.next();
   const { pathname } = request.nextUrl;
-  if (pathname === "/login" || pathname === "/api/auth") return NextResponse.next();
-  const cookie = request.cookies.get("journal_session")?.value;
+  if (pathname === "/login" || pathname === "/api/auth" || pathname.startsWith("/api/customer/"))
+    return NextResponse.next();
+  const cookie = request.cookies.get(multiuser ? "xt_customer_session" : "journal_session")?.value;
   if (!cookie) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

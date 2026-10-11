@@ -29,6 +29,8 @@ _Dashboard with generated demo data. All screenshots below use synthetic records
 
 **Windows: [download this project ZIP](https://github.com/kaixiang13140-pixel/xt-trade-journal-ai/archive/refs/heads/main.zip), extract it, then double-click `Start-XT.cmd`.** The launcher checks Node.js (installs LTS with Windows Package Manager if needed), uses the pinned pnpm without a global install, installs dependencies, checks SQLite, starts the local app, and opens your browser when ready. Keep the command window open. [中文启动说明](docs/xt-windows-start.md).
 
+**顾客版（独立登录，电脑 / 手机 / 平板）：** 本地试用双击 `Start-XT-Customers.cmd`。中英文可在界面切换。跨设备使用需要部署到 HTTPS 服务器；本地启动不会生成公网网址。[中文顾客版与部署说明](docs/xt-customers.md)。
+
 > **Prefer not to self-host?** A free hosted journal is available inside [LuxAlgo](https://app.luxalgo.com), alongside Quant Charts. Everything below is for running your own copy; this README describes the code in this checkout. See the [platform announcement](https://www.luxalgo.com/blog/luxalgo-charting-platform/) for hosted product context.
 
 ```bash

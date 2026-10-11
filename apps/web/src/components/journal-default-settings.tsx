@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { OptionSelect } from "@/components/ui/option-select";
 
 import { MonetaryField } from "./privacy";
@@ -29,7 +30,9 @@ export function JournalDefaultSettings() {
           value={r.accountId}
           onValueChange={(next) => update({ ...r, accountId: next })}
         >
-          <option value="">All accounts</option>
+          <option value="">
+            <I18nText text="All accounts" />
+          </option>
           {accounts?.accounts.map((a) => (
             <option key={a.id} value={a.id}>
               {a.name}

@@ -1,4 +1,5 @@
 "use client";
+import { I18nText } from "@/components/language";
 import { useImperativeHandle, useRef, useState, type Ref } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -191,7 +192,7 @@ export function RichEditor({
               onClick={() => insert("\n- [ ] ")}
               aria-label="Checklist"
             >
-              Checklist
+              <I18nText text="Checklist" />
             </Button>
             <Button type="button" size="sm" variant="ghost" onClick={() => setLinkOpen(!linkOpen)}>
               Link trade
@@ -240,7 +241,7 @@ export function RichEditor({
                 }
               }}
             >
-              Save template
+              <I18nText text="Save template" />
             </Button>
           </>
         )}
