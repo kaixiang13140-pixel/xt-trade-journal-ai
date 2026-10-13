@@ -10,6 +10,18 @@ export const middleware = (request: NextRequest) => {
   const multiuser = process.env.XT_MULTIUSER === "1";
   if (!multiuser && !process.env.JOURNAL_PASSWORD) return NextResponse.next();
   const { pathname } = request.nextUrl;
+  // The no-secrets cloud health probe is allowed without a customer cookie
+  // ONLY for local development on the user's own machine.
+  const localHost = ["localhost", "127.0.0.1", "::1", "[::1]"].includes(
+    request.nextUrl.hostname,
+  );
+  if (
+    process.env.NODE_ENV === "development" &&
+    pathname === "/api/cloud/health" &&
+    localHost
+  ) {
+    return NextResponse.next();
+  }
   if (pathname === "/login" || pathname === "/api/auth" || pathname.startsWith("/api/customer/"))
     return NextResponse.next();
   const cookie = request.cookies.get(multiuser ? "xt_customer_session" : "journal_session")?.value;
